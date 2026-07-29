@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Haru 的公开歌单——在这里浏览和搜索我的演唱曲目。"
+    />
+    <meta name="theme-color" content="#fff8fc" />
+    <title>Haru 的歌单</title>
+    <link rel="stylesheet" href="./style.css" />
+    <script src="./script.js" defer></script>
+  </head>
+  <body>
+    <div class="page-glow page-glow--pink" aria-hidden="true"></div>
+    <div class="page-glow page-glow--blue" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <a class="brand" href="#" aria-label="回到顶部">
+        <span class="brand__mark" aria-hidden="true">H</span>
+        <span class="brand__text">
+          <strong>Haru's Repertoire</strong>
+          <small>我的音乐收藏</small>
+        </span>
+      </a>
+      <a class="live-link" href="#song-list">
+        <span class="live-link__dot" aria-hidden="true"></span>
+        查看歌单
+      </a>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero__copy">
+          <div class="eyebrow">
+            <span aria-hidden="true">✦</span>
+            Welcome to my music room
+          </div>
+          <h1 id="hero-title">
+            把喜欢的旋律，
+            <span class="hero__accent">唱给你听。</span>
+          </h1>
+          <p class="hero__description">
+            这里收录了我会唱的歌曲。沿着熟悉的旋律慢慢浏览，
+            认识我的音乐世界，也收藏一份属于此刻的好心情。
+          </p>
+          <div class="hero__actions">
+            <a class="button button--primary" href="#song-list">
+              <span aria-hidden="true">♫</span>
+              浏览歌单
+            </a>
+          </div>
+          <div class="stats" aria-label="歌单统计">
+            <div class="stat">
+              <strong id="song-count">—</strong>
+              <span>首歌曲</span>
+            </div>
+            <span class="stats__divider" aria-hidden="true"></span>
+            <div class="stat">
+              <strong id="artist-count">—</strong>
+              <span>位歌手</span>
+            </div>
+            <span class="stats__divider" aria-hidden="true"></span>
+            <div class="stat">
+              <strong>∞</strong>
+              <span>份心动</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-art" aria-hidden="true">
+          <span class="spark spark--one">✦</span>
+          <span class="spark spark--two">✧</span>
+          <span class="note note--one">♪</span>
+          <span class="note note--two">♫</span>
+          <div class="orbit orbit--outer"></div>
+          <div class="orbit orbit--inner"></div>
+          <div class="record">
+            <div class="record__groove record__groove--one"></div>
+            <div class="record__groove record__groove--two"></div>
+            <div class="record__label">
+              <span>HARU</span>
+              <i></i>
+              <small>SONGBOOK</small>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="song-section" id="song-list" aria-labelledby="song-heading">
+        <div class="section-heading">
+          <div>
+            <div class="eyebrow">
+              <span aria-hidden="true">✦</span>
+              My repertoire
+            </div>
+            <h2 id="song-heading">我的歌单</h2>
+          </div>
+          <p>输入歌名或歌手，快速浏览已收录的演唱曲目。</p>
+        </div>
+
+        <div class="toolbar">
+          <label class="search-box" for="search-input">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="m21 21-4.35-4.35m2.35-5.65a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z"
+              />
+            </svg>
+            <input
+              id="search-input"
+              type="search"
+              placeholder="搜索歌名或歌手..."
+              autocomplete="off"
+            />
+            <kbd>Ctrl K</kbd>
+          </label>
+
+          <div class="scope-tabs" role="group" aria-label="搜索范围">
+            <button class="scope-tab is-active" data-scope="all" type="button">
+              全部
+            </button>
+            <button class="scope-tab" data-scope="title" type="button">
+              歌名
+            </button>
+            <button class="scope-tab" data-scope="artist" type="button">
+              歌手
+            </button>
+          </div>
+
+          <label class="sort-control">
+            <span>排序</span>
+            <select id="sort-select" aria-label="歌单排序">
+              <option value="default">默认顺序</option>
+              <option value="title">按歌名</option>
+              <option value="artist">按歌手</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="results-meta" aria-live="polite">
+          <span id="results-copy">正在载入歌单...</span>
+          <button id="clear-search" type="button" hidden>清除搜索</button>
+        </div>
+
+        <div class="song-grid" id="song-grid" aria-live="polite" aria-busy="true">
+          <div class="skeleton"></div>
+          <div class="skeleton"></div>
+          <div class="skeleton"></div>
+          <div class="skeleton"></div>
+          <div class="skeleton"></div>
+          <div class="skeleton"></div>
+        </div>
+
+        <div class="empty-state" id="empty-state" hidden>
+          <span class="empty-state__icon" aria-hidden="true">♬</span>
+          <h3>暂时没有找到这首歌</h3>
+          <p>换一个歌名或歌手关键词试试看吧。</p>
+          <button class="button button--ghost" id="empty-clear" type="button">
+            查看全部歌曲
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>Made with <b aria-label="love">♥</b> & music</span>
+      <span><span id="current-year"></span> Haru</span>
+    </footer>
+
+    <noscript>
+      <div class="noscript">请启用 JavaScript 以加载和搜索歌单。</div>
+    </noscript>
+  </body>
+</html>
